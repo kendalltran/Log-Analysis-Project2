@@ -37,10 +37,9 @@ Views were created to answer the third query in the project with the purpose of 
 
 The first view code is as follows:
 
-"create view mostviewedarticles as select articles.title, count(*)\n"
-    "as num from articles join log on articles.slug = substring(log.path, 10)\n"
-    "group by articles.title order by num desc"
+"CREATE VIEW mostviewedarticles AS SELECT articles.title, count(*) AS NUM FROM articles JOIN log ON articles.slug = substring(log.path, 10) GROUP BY articles.title ORDER BY num DESC"
 
+"CREATE VIEW statuscounter AS SELECT time::DATE, SUM (CASE WHEN status = '200 OK' THEN 1 ELSE 0 END)::INTEGER AS success, SUM (CASE WHEN status  =  '404 NOT FOUND' THEN 1 ELSE 0 END)::INTEGER AS error FROM log GROUP BY time::DATE"
 
 ##  Troubleshooting
 TBD
